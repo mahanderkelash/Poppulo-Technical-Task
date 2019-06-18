@@ -50,6 +50,12 @@ namespace PoppuloTechnicalTask.Controllers
                     return View(model);
 
                 }
+                else if (InventoryItemRepository.GetTotalQuantity() > 200)
+                {
+                    var model = CreateInventoryItemViewModel(inventoryItemViewModel.InventoryItem,
+                        $"Your current limit of adding item is exceeded, you can add {200- InventoryItemRepository.GetTotalQuantity()} items only");
+                    return View(model);
+                }
                 else
                 {
                     var inventoryitem = InventoryItemRepository.GetInventoryItem(inventoryItemViewModel.InventoryItem.ItemName);
@@ -126,6 +132,25 @@ namespace PoppuloTechnicalTask.Controllers
             var inventoryItemVm = CreateInventoryItemViewModel(inventoryItemViewModel.InventoryItem, "Please input all fields");
             return View(inventoryItemVm);
         }
+
+        public IActionResult SearchItems()
+        {
+            var model = new MinMaxPrice();
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SearchItems(MinMaxPrice model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("SearchItems", model);
+            }
+            var listItems = InventoryItemRepository.GetInventoryItemsInPriceRange(model.MinPrice, model.MaxPrice);
+
+            return View("Index", listItems);
+        }
+
 
         public IActionResult Details(int id)
         {

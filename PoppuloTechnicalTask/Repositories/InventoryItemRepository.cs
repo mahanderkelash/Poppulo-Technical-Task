@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PoppuloTechnicalTask.Models.DbContext;
 using PoppuloTechnicalTask.Models.InventoryCategory;
+using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace PoppuloTechnicalTask.Repositories
 {
@@ -39,7 +40,18 @@ namespace PoppuloTechnicalTask.Repositories
             var categorieslist = new SelectList(categories, "Value", "Text");
             return categorieslist;
         }
-        
+
+        public int GetTotalQuantity()
+        {
+            int count = 0;
+            var items = _context.InventoryItems.ToList();
+            foreach (var item in items)
+            {
+                count = count + item.ItemQuantity;
+            }
+
+            return count;
+        }
 
         public InventoryItem GetInventoryItem(string itemName)
         {
@@ -53,6 +65,15 @@ namespace PoppuloTechnicalTask.Repositories
             var InventoryItem = _context.InventoryItems.Include(x => x.Category)
                 .FirstOrDefault(m => m.ItemId == id);
             return InventoryItem;
+        }
+
+        public IEnumerable<InventoryItem> GetInventoryItemsInPriceRange(double minPrice, double maxPrice)
+        {
+            var items = _context.InventoryItems.Include(x => x.Category)
+                .Where(x => x.ItemPrice < maxPrice && x.ItemPrice > minPrice).ToList();
+
+            return items;
+
         }
 
         public void UpdateInventoryItem(InventoryItem item)
