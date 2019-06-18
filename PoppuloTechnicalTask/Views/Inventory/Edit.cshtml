@@ -1,0 +1,49 @@
+﻿@model PoppuloTechnicalTask.Models.InventoryItem.InventoryItemViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="InventoryItem.ItemId" />
+            <div class="form-group">
+                <label asp-for="InventoryItem.ItemName" class="control-label"></label>
+                <input asp-for="InventoryItem.ItemName" class="form-control" />
+                <span asp-validation-for="InventoryItem.ItemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InventoryItem.ItemPrice" class="control-label"></label>
+                <input asp-for="InventoryItem.ItemPrice" class="form-control" />
+                <span asp-validation-for="InventoryItem.ItemPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InventoryItem.ItemQuantity" class="control-label"></label>
+                <input asp-for="InventoryItem.ItemQuantity" class="form-control" />
+                <span asp-validation-for="InventoryItem.ItemQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Catgory</label>
+                @Html.DropDownListFor(m => m.InventoryItem.CategoryId, Model.Categories)
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <p>@Model.ErrorMessage</p>
+            }
+
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
