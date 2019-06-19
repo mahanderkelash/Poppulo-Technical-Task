@@ -1,12 +1,11 @@
 # Poppulo-Technical-Task
 Poppulo Technical Task
 
-
 Mahander Kelash , mahanderlanghani@gmail.com
 
 
 Framework Used:
-Framework used to complete this task is .net, the api controller and controller is made using .net core and for database I used Microsoft SQL Server. 
+Framework used to complete this task is .net core, the api controller and controller is made using .net core and for database I used Microsoft SQL Server. 
 
 Installation of Application
 This application is a web application that is built using .net core framework, to  run this application you need following:
@@ -31,7 +30,7 @@ This application is a MVC application so it contains following items
 1.	InventoryItem and Category Model classes.
 2.	An api controller for Inventory Item.
 3.	A controller for inventory items.
-4.	A inventory item repository to separate the main/business logic from controllers and also for dependency injection and for system testability.
+4.	A repository (inventoryitemrepository) to separate the main/business logic from controllers and also for dependency injection and for system testability.
 5.	And Views for Inventory Item and category.
 
 Persistence Level
