@@ -90,6 +90,11 @@ namespace PoppuloTechnicalTask.Repositories
             _context.SaveChangesAsync();
         }
 
+        public List<InventoryItem> GetLastFiveItems()
+        {
+            return _context.InventoryItems.Include(x => x.Category).OrderByDescending(i => i.ItemEntryDate).Take(5).ToList();
+        }
+
        
 
 

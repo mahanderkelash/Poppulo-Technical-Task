@@ -150,6 +150,14 @@ namespace PoppuloTechnicalTask.Controllers
 
             return View("Index", listItems);
         }
+      
+        public IActionResult GetLastFiveItems()
+        {
+          
+            var listItems = InventoryItemRepository.GetLastFiveItems();
+
+            return View("Index", listItems);
+        }
 
 
         public IActionResult Details(int id)

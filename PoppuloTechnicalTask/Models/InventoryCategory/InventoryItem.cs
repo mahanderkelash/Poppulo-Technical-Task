@@ -25,5 +25,6 @@ namespace PoppuloTechnicalTask.Models.InventoryCategory
 
         public Category  Category { get; set; }
         public int  CategoryId { get; set; }
+        public DateTime ItemEntryDate { get; set; }
     }
 }
